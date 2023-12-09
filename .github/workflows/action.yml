@@ -2,6 +2,10 @@ name: Test Santa
 
 description: "Santa is secret"
 
+on:
+  workflow_call
+
+
 runs:
   using: "composite"
   steps:
@@ -16,5 +20,10 @@ runs:
     - name: Install project
       shell: bash
       run: |
-        # upgrade pip
         make install
+        make fmt
+
+    - name: Test project
+      shell: bash
+      run: |
+        make test
