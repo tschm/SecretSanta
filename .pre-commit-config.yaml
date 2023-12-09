@@ -27,4 +27,3 @@ repos:
     rev: v3.10.1
     hooks:
       - id: pyupgrade
-
