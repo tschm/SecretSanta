@@ -1,7 +1,5 @@
 name: Test Santa
 
-description: "Santa is secret"
-
 on:
   push
 
