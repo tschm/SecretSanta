@@ -3,8 +3,7 @@ name: Test Santa
 description: "Santa is secret"
 
 on:
-  workflow_call
-
+  push
 
 runs:
   using: "composite"
