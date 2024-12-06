@@ -32,4 +32,9 @@ help:  ## Display this help screen
 .PHONY: marimo
 marimo: install ## Start jupyter lab
 	${VENV}/bin/pip install marimo
-	${VENV}/bin/marimo edit notebooks
+	${VENV}/bin/marimo edit app.py
+
+.PHONY: app
+app: install
+	${VENV}/bin/pip install marimo
+	${VENV}/bin/marimo run app.py
