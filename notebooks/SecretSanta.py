@@ -11,44 +11,38 @@ def __(mo):
 
 
 @app.cell
-def __():
+def __input_names_a(mo):
+    names_A = mo.ui.text(placeholder="A,B,C...")
+    names_B = mo.ui.text(placeholder="A,B,C...")
+
+    # Create shuffle button with conditional enabling
+    mo.md(
+        f"""
+        Enter a comma-separated list of names for the 1st group: {names_A}
+
+        Enter a comma-separated list of names for the 2nd group: {names_B}
+        """
+    )
+    return names_A, names_B
+
+
+@app.cell
+def __(mo, names_A, names_B):
     from random import shuffle
-    import collections
 
-    return collections, shuffle
+    aa = list([name.strip() for name in names_A.value.split(",") if name.strip()])
+    bb = list([name.strip() for name in names_B.value.split(",") if name.strip()])
 
+    shuffle(aa)
+    shuffle(bb)
 
-@app.cell
-def __(collections):
-    # We are using collections as we want to use the rotate function
-    groupA = collections.deque(["A", "B", "C"])
-    groupB = collections.deque(["D", "E", "F"])
-    return groupA, groupB
+    mo.md(
+        f"""
+        Shuffled 1st group: {aa}
 
-
-@app.cell
-def __(groupA, groupB, shuffle):
-    # We have two groups of equal length
-    # A pair is always between members of the two different groups
-    assert len(groupA) == len(groupB)
-    shuffle(groupA)
-    shuffle(groupB)
-    return
-
-
-@app.cell
-def __(groupA, groupB):
-    for _x, _y in zip(groupA, groupB):
-        print(_x, _y)
-    return
-
-
-@app.cell
-def __(groupA, groupB):
-    groupA.rotate(-1)
-    for _x, _y in zip(groupB, groupA):
-        print(_x, _y)
-    return
+        Shuffled 2nd group: {bb}
+        """
+    )
 
 
 @app.cell
