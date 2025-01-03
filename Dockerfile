@@ -1,5 +1,5 @@
 FROM python:3.12
-COPY --from=ghcr.io/astral-sh/uv:0.4.20 /uv /bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.5.14 /uv /bin/uv
 
 RUN useradd -m -u 1000 user
 ENV PATH="/home/user/.local/bin:$PATH"
