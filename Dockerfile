@@ -17,11 +17,13 @@ RUN chmod +x /bin/uv
 
 # Set working directory and switch to user early
 WORKDIR /app
-USER user
 
 # Copy and install requirements first to leverage caching
+# You need to be root if you install into the "system"
 COPY --chown=user:user ./requirements.txt requirements.txt
-RUN uv pip install --no-deps -r requirements.txt
+RUN uv pip install -r requirements.txt
+
+USER user
 
 # Copy application code
 COPY --chown=user:user . .
