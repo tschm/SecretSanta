@@ -38,3 +38,8 @@ marimo: install ## Start jupyter lab
 app: install
 	${VENV}/bin/pip install marimo
 	${VENV}/bin/marimo run app.py
+
+.PHONY: build
+build:
+	@docker build -t marimo-app .
+	@docker run -it --rm -p 7860:7860 marimo-app

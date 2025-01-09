@@ -15,7 +15,6 @@ repos:
       # Run the formatter
       - id: ruff-format
 
-
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.43.0
     hooks:
@@ -27,13 +26,13 @@ repos:
     hooks:
       - id: pyupgrade
 
-  - repo: https://github.com/rhysd/actionlint
-    rev: v1.7.6
-    hooks:
-      - id: actionlint
-        args: [-ignore, SC]
-
   - repo: https://github.com/crate-ci/typos
     rev: v1.29.4
     hooks:
       - id: typos
+
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.30.0
+    hooks:
+      - id: check-renovate
+        args: [ "--verbose" ]
