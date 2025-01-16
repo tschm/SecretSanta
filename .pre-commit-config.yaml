@@ -19,7 +19,6 @@ repos:
     rev: v0.43.0
     hooks:
       - id: markdownlint
-        # args: [--disable, MD025]
 
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.19.1
