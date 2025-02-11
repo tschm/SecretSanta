@@ -12,7 +12,7 @@ ENV PATH="/home/user/.local/bin:$PATH" \
 RUN useradd -m -u 1000 user
 
 # Copy uv binary and make it executable in one layer
-COPY --from=ghcr.io/astral-sh/uv:0.5.29 /uv /bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.5.30 /uv /bin/uv
 RUN chmod +x /bin/uv
 
 # Set working directory and switch to user early
