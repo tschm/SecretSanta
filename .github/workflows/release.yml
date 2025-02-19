@@ -1,19 +1,45 @@
-name: Bump version and publish
+name: Bump version
 
 on:
-  workflow_dispatch:
-
+  workflow_dispatch
 
 jobs:
   tag:
     permissions:
       contents: write
-
     runs-on: ubuntu-latest
-
+    outputs:
+      tag: ${{ steps.tag_version.outputs.tag }}  # This will output the tag for other jobs
     steps:
       - name: Generate Tag
+        id: tag_version
         uses: cvxgrp/.github/actions/tag@v2.2.4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           build_package: 'false'
+
+      - name: Debug Output Tag
+        run: |
+            echo "Tag: ${{ steps.tag_version.outputs.tag }}"
+
+  docker:
+    needs: tag
+    permissions:
+      contents: read
+      packages: write
+
+    runs-on: ubuntu-latest
+    steps:
+      # -----------------------------------------------------------------------------
+      # Step 1: Checkout the repository
+      # -----------------------------------------------------------------------------
+      - name: Checkout [${{ github.repository }}]
+        uses: actions/checkout@v4
+
+      - name: Build and Push Docker Image
+        uses: cvxgrp/.github/actions/docker@v2.2.4
+        with:
+          repository: ${{ github.repository }}
+          tag: ${{ needs.tag.outputs.tag }}
+          dockerfile-path: 'docker/Dockerfile'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
