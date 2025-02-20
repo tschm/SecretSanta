@@ -1,5 +1,5 @@
 # Use a more specific Python slim image to reduce size
-FROM python:3.12-slim
+FROM python:3.13-slim
 
 # Set environment variables in one layer
 ENV PATH="/home/user/.local/bin:$PATH" \
